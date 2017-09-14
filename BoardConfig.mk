@@ -18,7 +18,20 @@ TARGET_BOOTLOADER_BOARD_NAME := G8141
 
 # NFC
 NXP_CHIP_TYPE := PN553
+NXP_CHIP_FW_TYPE := PN553
 
 BOARD_KERNEL_CMDLINE += androidboot.hardware=maple
 
-TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/clearpad/wakeup_gesture"
+# Recovery config
+BOARD_SONY_INIT_FLAGS += -DDEV_BLOCK_PATH="\"/dev/block/sde"\"
+BOARD_SONY_INIT_FLAGS += -DDEV_BLOCK_FOTA_PATH="\"/dev/block/sde45"\"
+BOARD_SONY_INIT_FLAGS += -DDEV_BLOCK_FOTA_NUM="45"
+BOARD_SONY_INIT_FLAGS += -DDEV_BLOCK_FOTA_MAJOR="259"
+BOARD_SONY_INIT_FLAGS += -DDEV_BLOCK_FOTA_MINOR="29"
+
+# For split frame buffer in recovery
+TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
+TARGET_RECOVERY_OVERLAY_ENABLE := true
+TARGET_RECOVERY_OVERLAY_ENABLE_DOUBLE_BUFFERING := false
+
+#TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/input/clearpad/wakeup_gesture"
